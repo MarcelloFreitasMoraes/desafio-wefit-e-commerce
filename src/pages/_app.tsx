@@ -1,4 +1,4 @@
-import { BaseLayout } from '@/global/components'
+import {  } from '@/global/components'
 import '@/styles/globals.css'
 import theme from '@/styles/theme/theme'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
@@ -20,9 +20,7 @@ export default function App({ Component, pageProps }: AppProps) {
     return (
         <ThemeProvider theme={theme}>
             <QueryClientProvider client={queryClient}>
-                <BaseLayout>
                     <Component {...pageProps} />
-                </BaseLayout>
             </QueryClientProvider>
         </ThemeProvider>
     )

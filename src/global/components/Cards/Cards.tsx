@@ -10,23 +10,26 @@ const Cards: React.FC<CardProps> = ({
     price,
     amount,
     image,
+    data,
     action,
 }) => {
     return (
         <S.Container>
             <S.Box>
-                <Image src={image} alt={title} width={147} height={188} />
+                <Image src={data?.image || image} alt={data?.title || title} width={147} height={188} />
                 <S.Info>
                     <TypographicComponent
                         description
                         primary
-                        title={title}
+                        title={data?.title || title}
                         weight="bold"
                     />
                     <TypographicComponent
                         regular
                         primary
-                        title={`R$ ${price?.toLocaleString('pt-BR', {
+                        title={`R$ ${data?.price?.toLocaleString('pt-BR', {
+                            minimumFractionDigits: 2,
+                        }) || price?.toLocaleString('pt-BR', {
                             minimumFractionDigits: 2,
                         })}`}
                         weight="bold"
@@ -36,7 +39,7 @@ const Cards: React.FC<CardProps> = ({
             <S.ContentButton>
                 <S.Button onClick={action}>
                     <MeCar />
-                    <span>{amount}</span> ADICIONAR AO CARRINHO
+                    <span>{data?.amount || amount}</span> ADICIONAR AO CARRINHO
                 </S.Button>
             </S.ContentButton>
         </S.Container>

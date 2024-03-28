@@ -1,4 +1,4 @@
-import { Cards, Loading } from '@/global/components'
+import { BaseLayout, Cards, Loading } from '@/global/components'
 import * as S from './SpecificFilme.styled'
 import { useRouter } from 'next/router'
 import useProductsData from '@/global/hooks/useProductsData'
@@ -9,21 +9,18 @@ const Search: React.FC = () => {
     const { ListProductsQuery, LoadingListProducts } = useProductsData(id)
 
     return (
-        <>
+        <BaseLayout>
             {LoadingListProducts ? (
                 <Loading />
             ) : (
                 <S.ContainerCards>
                     <Cards
-                        amount={ListProductsQuery?.data?.amount ?? 0} 
-                        image={ListProductsQuery?.data?.image ?? ''}
-                        price={ListProductsQuery?.data?.price ?? 0} 
-                        title={ListProductsQuery?.data?.title ?? ''} 
+                        data={ListProductsQuery?.data}                       
                         action={() => {}}
                     />
                 </S.ContainerCards>
             )}
-        </>
+        </BaseLayout>
     )
 }
 

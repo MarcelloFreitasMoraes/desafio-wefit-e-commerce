@@ -1,4 +1,4 @@
-import { Cards, Loading } from '@/global/components'
+import { BaseLayout, Cards, Loading } from '@/global/components'
 import useProductsData from '@/global/hooks/useProductsData'
 import Head from 'next/head'
 import * as S from '../styles/Home.styled'
@@ -8,7 +8,7 @@ export default function Home() {
     const { ListProductsQuery, LoadingListProducts } = useProductsData()
 
     return (
-        <>
+        <BaseLayout>
             <Head>
                 <title>Desafio WeFit</title>              
                 <link rel="icon" href="/favicon.ico" />
@@ -18,7 +18,7 @@ export default function Home() {
             ) : (
                 <S.ContainerCards>
                     {ListProductsQuery?.data && Object.entries(ListProductsQuery.data)?.map(
-                        (x: any) => (
+                        (x: any, index: number) => (
                             <Fragment key={x[1].id}>
                                 <Cards
                                     amount={x[1]?.amount}
@@ -32,6 +32,6 @@ export default function Home() {
                     )}
                 </S.ContainerCards>
             )}
-        </>
+        </BaseLayout>
     )
 }
