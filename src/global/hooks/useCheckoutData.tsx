@@ -3,14 +3,14 @@ import { http } from '@/pages/api/api'
 import { useMutation, useQuery } from '@tanstack/react-query'
 import { DataProps } from '../types/types'
 
-export const ProductsKey = 'ProductsData'
+export const CheckoutKey = 'CheckoutData'
 
-export default function useProductsData(id?: string | string[] | undefined) { 
+export default function useCheckoutData() {
     const query = useQuery<any, any, DataProps[], any>(
-        [ProductsKey, id],
+        [CheckoutKey],
         () =>
             http
-                .get(id ? `products/${id}.json/` : `products.json`)
+                .get(`checkout.json`)
                 .then((res) => {
                     return res?.data
                 })
@@ -40,8 +40,8 @@ export default function useProductsData(id?: string | string[] | undefined) {
     )
 
     return {
-        ListProductsQuery: query,
-        ListProductsMutation: mutation,
-        LoadingListProducts: query.isLoading || mutation.isLoading
+        CheckoutQuery: query,
+        CheckoutMutation: mutation,
+        LoadingCheckout: query.isLoading || mutation.isLoading
     }
 }

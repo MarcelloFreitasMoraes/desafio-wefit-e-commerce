@@ -1,16 +1,17 @@
-"use client"
-
 export const theme = {
   colors: {
     primary: "#009edd",
     secundary: "#2F2E41",
     text: "#333333",
+    description: "#999999",
     white: "#FFFFFF",
+    disabled: "#C0C0C0",
   },
   fonts: {
     fontSize: {
-      small: '14px',
-      medium: '16px',
+      small: '12px',
+      medium: '14px',
+      regular:'16px',
       large: '20px',
     },
     fontFamily: {

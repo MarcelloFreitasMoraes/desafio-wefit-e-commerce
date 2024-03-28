@@ -1,21 +1,46 @@
-import React from 'react';
-import Image from 'next/image';
-import * as S from "./Cards.styled"
-import { MeCar } from '@/global/assets/icons/meCar';
+import React from 'react'
+import Image from 'next/image'
+import * as S from './Cards.styled'
+import { MeCar } from '@/global/assets/icons/MeCar'
+import TypographicComponent from '../Typographic/Typographic'
+import { CardProps } from './types'
 
-const Cards: React.FC = () => {
-  return (
-    <S.Container>
-      <S.Box>
-      <Image src={'https://wefit-react-web-test.s3.amazonaws.com/viuva-negra.png'} alt={'produtos'} width={147} height={188} />
-      <p>NOME PRODUTO</p>
-      <p>Preço</p>
-      </S.Box>
-      <div>        
-        <S.Button><MeCar/> 0 {' '}ADICIONAR AO CARRINHO</S.Button>
-      </div>
-    </S.Container>
-  );
+const Cards: React.FC<CardProps> = ({
+    title,
+    price,
+    amount,
+    image,
+    action,
+}) => {
+    return (
+        <S.Container>
+            <S.Box>
+                <Image src={image} alt={title} width={147} height={188} />
+                <S.Info>
+                    <TypographicComponent
+                        description
+                        primary
+                        title={title}
+                        weight="bold"
+                    />
+                    <TypographicComponent
+                        regular
+                        primary
+                        title={`R$ ${price?.toLocaleString('pt-BR', {
+                            minimumFractionDigits: 2,
+                        })}`}
+                        weight="bold"
+                    />
+                </S.Info>
+            </S.Box>
+            <S.ContentButton>
+                <S.Button onClick={action}>
+                    <MeCar />
+                    <span>{amount}</span> ADICIONAR AO CARRINHO
+                </S.Button>
+            </S.ContentButton>
+        </S.Container>
+    )
 }
 
-export default Cards;
+export default Cards
