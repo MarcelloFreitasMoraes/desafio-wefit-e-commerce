@@ -6,13 +6,13 @@ import { DataProps } from '../types/types'
 export const CheckoutKey = 'CheckoutData'
 
 export default function useCheckoutData() {
-    const query = useQuery<any, any, DataProps[], any>(
+    const query = useQuery<any, any, DataProps, any>(
         [CheckoutKey],
         () =>
             http
                 .get(`checkout.json`)
                 .then((res) => {
-                    return res?.data
+                    return res?.data || []
                 })
                 .catch((err) => err),
         {

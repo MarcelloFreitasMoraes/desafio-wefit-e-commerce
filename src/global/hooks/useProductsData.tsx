@@ -12,7 +12,7 @@ export default function useProductsData(id?: string | string[] | undefined) {
             http
                 .get(id ? `products/${id}.json/` : `products.json`)
                 .then((res) => {
-                    return res?.data
+                    return res?.data || []
                 })
                 .catch((err) => err),
         {
