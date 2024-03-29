@@ -1,12 +1,12 @@
 import stale from '@/global/utils/stale'
 import { http } from '@/pages/api/api'
-import { useMutation, useQuery } from '@tanstack/react-query'
-import { DataProps } from '../types/types'
+import { useQuery } from '@tanstack/react-query'
+import { ProductList } from '../types/types'
 
 export const ProductsKey = 'ProductsData'
 
 export default function useProductsData(id?: string | string[] | undefined) { 
-    const query = useQuery<any, any, DataProps[], any>(
+    const query = useQuery<ProductList[]>(
         [ProductsKey, id],
         () =>
             http
@@ -20,28 +20,10 @@ export default function useProductsData(id?: string | string[] | undefined) {
             cacheTime: 0,
             enabled: true,
         }
-    )
-
-    const mutation = useMutation(
-        (values: DataProps) => {
-            const method = values.id ? 'put' : 'post'
-
-            const body: any = {
-                ...values,
-            } as DataProps
-
-            return http[method](`checkout.json/`, ...body)
-        },
-        {
-            onSuccess: () => {
-                query.refetch()
-            },
-        }
-    )
-
+    )    
+    
     return {
-        ListProductsQuery: query,
-        ListProductsMutation: mutation,
-        LoadingListProducts: query.isLoading || mutation.isLoading
+        ListProductsQuery: query,       
+        LoadingListProducts: query.isLoading,
     }
 }

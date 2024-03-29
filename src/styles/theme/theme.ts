@@ -6,6 +6,7 @@ export const theme = {
     description: "#999999",
     white: "#FFFFFF",
     disabled: "#C0C0C0",
+    green: "#039B00",
   },
   fonts: {
     fontSize: {

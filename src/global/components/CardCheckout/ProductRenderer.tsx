@@ -1,83 +1,96 @@
-import React from 'react';
 import * as S from './CardCheckout.styled';
 import Image from 'next/image';
 import { More } from '@/global/assets/icons/More';
 import { Smaller } from '@/global/assets/icons/Smaller';
 import TypographicComponent from '@/global/components/Typographic/Typographic';
 import { Delete } from '@/global/assets/icons/Delete';
+import useCheckoutData from '@/global/hooks/useCheckoutData';
+import { CardCheckoutProps } from './types';
 
-const ProductRenderer: React.FC<{ data: any[] }> = ({ data }) => {
+const ProductRenderer: React.FC<CardCheckoutProps> = ({ data }) => {     
+  const { Edit, DeleteMutation } = useCheckoutData()   
   return (
     <>
-      {data && Object.entries(data)?.map((product) => (
-        <S.Grid key={product[1]?.id}>
-          <S.ContentProduto>
-            <TypographicComponent
-              medium
-              primary
-              title="PRODUTO"
-              weight="bold"
-            />
-            <S.Content>
-              <Image
-                src={product[1]?.image}
-                alt={product[1]?.title}
-                width={91}
-                height={114}
-              />
-              <S.Box>
+      {data && Object.entries(data)?.map(([key, product], index, arr) => {
+        const isUnique = arr.findIndex(([_, p]) => p.id === product.id) === index;
+        console.log(product, 'product');
+        console.log(data, 'data');
+        // Se o produto for único, renderiza
+        if (isUnique) {
+          return (
+            <S.Grid key={product.id}>
+              <S.ContentProduto>
                 <TypographicComponent
                   medium
                   primary
-                  title={product[1]?.title}
+                  title="PRODUTO"
                   weight="bold"
                 />
+                <S.Content>
+                  <Image
+                    src={product.image}
+                    alt={product.title}
+                    width={91}
+                    height={114}
+                  />
+                  <S.Box>
+                    <TypographicComponent
+                      medium
+                      primary
+                      title={product.title}
+                      weight="bold"
+                    />
+                    <TypographicComponent
+                      regular
+                      primary
+                      title={`R$ ${product.price?.toLocaleString('pt-BR', {
+                        minimumFractionDigits: 2,
+                      })}`}
+                      weight="bold"
+                    />
+                  </S.Box>
+                </S.Content>
+              </S.ContentProduto>
+              <S.ContentQtd>
                 <TypographicComponent
-                  regular
+                  medium
                   primary
-                  title={`R$ ${product[1]?.price?.toLocaleString('pt-BR', {
-                    minimumFractionDigits: 2,
-                  })}`}
+                  title="QTD"
                   weight="bold"
                 />
-              </S.Box>
-            </S.Content>
-          </S.ContentProduto>
-          <S.ContentQtd>
-            <TypographicComponent
-              medium
-              primary
-              title="QTD"
-              weight="bold"
-            />
-            <S.BoxInput>
-              <Smaller />
-              <S.Input type="text" disabled value={product[1]?.amount} /> <More />
-            </S.BoxInput>
-          </S.ContentQtd>
-          <S.ContentQtd>
-            <TypographicComponent
-              medium
-              primary
-              title="SUBTOTAL"
-              weight="bold"
-            />
-            <S.BoxInput>
-              <TypographicComponent
-                regular
-                primary
-                title={`R$ ${product[1]?.price?.toLocaleString('pt-BR', {
-                  minimumFractionDigits: 2,
-                })}`}
-                weight="bold"
-              />
-            </S.BoxInput>
-          </S.ContentQtd>
-          <S.IconBox>
-            <Delete />
-          </S.IconBox>
-        </S.Grid>
-      ))}
+                <S.BoxInput>
+                  <Smaller action={() => Edit.mutate({ id: key, decrement: true })}/>
+                  <S.Input type="text" disabled value={product.amount} /> 
+                    <More action={() => Edit.mutate({ id: key, decrement: false })}/>
+                </S.BoxInput>
+              </S.ContentQtd>
+              <S.ContentSub>
+                <TypographicComponent
+                  medium
+                  primary
+                  title="SUBTOTAL"
+                  weight="bold"
+                />
+                <S.BoxInput>
+                  <TypographicComponent
+                    regular
+                    primary
+                    title={`R$ ${product.total?.toLocaleString('pt-BR', {
+                      minimumFractionDigits: 2,
+                    })}`}
+                    weight="bold"
+                  />
+                </S.BoxInput>
+              </S.ContentSub>
+              <S.IconBox>
+                <Delete action={() => DeleteMutation.mutate(key)}/>
+              </S.IconBox>
+            </S.Grid>
+          );
+        }
+        // Se não for único, não renderiza nada
+        return null;
+      })}
     </>
   );
 };

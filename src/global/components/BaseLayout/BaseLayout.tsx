@@ -41,11 +41,10 @@ const BaseLayout: React.FC<BaseLayoutProps> = ({ children, offInput }) => {
             }
         }
     }
-console.log(value, 'value');
 
     return (
         <Container>
-            <Header amount={itemCount} />
+            <Header amount={itemCount || 0} />
             <div>
                 {!offInput && (
                     <>

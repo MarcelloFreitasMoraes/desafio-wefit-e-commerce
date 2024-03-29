@@ -1,5 +1,10 @@
 import styled from 'styled-components'
 
+interface ButtonProps {
+   backgoundColor: boolean
+   disabled: boolean
+}
+
 export const Container = styled.div`
     width: 338.67px;
     height: 324px;
@@ -26,8 +31,8 @@ export const ContentButton = styled.div`
         padding: 0 5px;
     }
 `
-export const Button = styled.button`
-    background-color: ${(props) => props.theme.colors.primary};
+export const Button = styled.button<ButtonProps>`
+background-color: ${(props) => props.backgoundColor ? props.theme.colors.green : props.theme.colors.primary};
     color: ${(props) => props.theme.colors.white};
     width: 306.67px;
     height: 40px;
@@ -35,4 +40,5 @@ export const Button = styled.button`
     gap: 12px;
     border-radius: 4px;
     border: none;   
+    cursor: ${(props) => props.disabled ? 'inherit' : 'pointer'};    
 `

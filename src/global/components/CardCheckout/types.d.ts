@@ -1,8 +1,6 @@
+
+import { ProductList } from '@/global/types/types';
 export interface CardCheckoutProps {
-    // amount: number
-    // image: string
-    // price: number
-    // title: string
-    data: any
-    // action: () => void
+    data?: ProductList | undefined
+    price?: number | undefined
 }

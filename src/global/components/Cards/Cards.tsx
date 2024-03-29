@@ -5,23 +5,21 @@ import { MeCar } from '@/global/assets/icons/MeCar'
 import TypographicComponent from '../Typographic/Typographic'
 import { CardProps } from './types'
 
-const Cards: React.FC<CardProps> = ({
-    title,
-    price,
-    amount,
-    image,
-    data,
-    action,
-}) => {
+const Cards: React.FC<CardProps> = ({ data, action, amount = 0 }) => {   
     return (
         <S.Container>
             <S.Box>
-                <Image src={data?.image || image} alt={data?.title || title} width={147} height={188} />
+                <Image
+                    src={data?.image}
+                    alt={data?.title}
+                    width={147}
+                    height={188}
+                />
                 <S.Info>
                     <TypographicComponent
                         description
                         primary
-                        title={data?.title || title}
+                        title={data?.title}
                         weight="bold"
                     />
                     <TypographicComponent
@@ -29,17 +27,15 @@ const Cards: React.FC<CardProps> = ({
                         primary
                         title={`R$ ${data?.price?.toLocaleString('pt-BR', {
                             minimumFractionDigits: 2,
-                        }) || price?.toLocaleString('pt-BR', {
-                            minimumFractionDigits: 2,
                         })}`}
                         weight="bold"
                     />
                 </S.Info>
             </S.Box>
             <S.ContentButton>
-                <S.Button onClick={action}>
+                <S.Button onClick={action} backgoundColor={amount > 0} disabled={amount > 0} >
                     <MeCar />
-                    <span>{data?.amount || amount}</span> ADICIONAR AO CARRINHO
+                    <span>{amount}</span>{`${amount > 0 ? ' VÁ PARA O CARRINHO' : 'ADICIONAR AO CARRINHO    '} `}
                 </S.Button>
             </S.ContentButton>
         </S.Container>

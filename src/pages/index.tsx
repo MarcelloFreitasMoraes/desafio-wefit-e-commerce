@@ -3,33 +3,43 @@ import useProductsData from '@/global/hooks/useProductsData'
 import Head from 'next/head'
 import * as S from '../styles/Home.styled'
 import { Fragment } from 'react'
+import useCheckoutData from '@/global/hooks/useCheckoutData'
 
 export default function Home() {
-    const { ListProductsQuery, LoadingListProducts } = useProductsData()
-
+    const { ListProductsQuery, LoadingListProducts } =
+        useProductsData()
+    const { CheckoutQuery, CheckoutMutation } = useCheckoutData()
+    const amounts = CheckoutQuery?.data ? Object.values(CheckoutQuery.data) : [];
+    
     return (
         <BaseLayout>
             <Head>
-                <title>Desafio WeFit</title>              
+                <title>Desafio WeFit</title>
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             {LoadingListProducts ? (
                 <Loading />
             ) : (
                 <S.ContainerCards>
-                    {ListProductsQuery?.data && Object.entries(ListProductsQuery.data)?.map(
-                        (x: any, index: number) => (
-                            <Fragment key={x[1].id}>
-                                <Cards
-                                    amount={x[1]?.amount}
-                                    image={x[1]?.image}
-                                    price={x[1]?.price}
-                                    title={x[1]?.title}
-                                    action={() => {}}
-                                />
-                            </Fragment>
-                        )
-                    )}
+                    {ListProductsQuery?.data &&
+                        Object.entries(ListProductsQuery?.data)?.map((x) => {
+                            const product = x[1]
+                            const amount =
+                                amounts.find(
+                                    (item: { id: number }) =>
+                                        item.id === product.id
+                                )?.amount || 0                               
+
+                            return (
+                                <Fragment key={product?.id}>
+                                    <Cards
+                                        data={product}
+                                        amount={amount}
+                                        action={() => CheckoutMutation.mutate({ ...product })}
+                                    />
+                                </Fragment>
+                            )
+                        })}
                 </S.ContainerCards>
             )}
         </BaseLayout>

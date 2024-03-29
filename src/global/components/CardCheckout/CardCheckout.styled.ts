@@ -1,16 +1,20 @@
 import styled from 'styled-components'
 
+export const Grid = styled.div`
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    width: 100%;
+    margin: 0 0 20px 0;
+`
+
 export const Container = styled.div`
     width: 100%;
-    height: 293px;
+    height: auto;
     border-radius: 4px;
     padding: 24px;
     gap: 24px;
     background-color: ${(props) => props.theme.colors.white};
-`
-export const Grid = styled.div`
-    display: flex;
-    justify-content: space-between;
 `
 
 export const ContentProduto = styled.div`
@@ -37,11 +41,21 @@ export const ContentQtd = styled.div`
     flex-direction: column;
     gap: 8px;
 `
+export const ContentSub = styled.div`
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 8px;
+`
 export const BoxInput = styled.div`
     display: flex;
     align-items: center;
     gap: 8px;
     margin-top: 3.5rem;
+
+    svg {
+        cursor: pointer;
+    }
 `
 
 export const Input = styled.input`
@@ -55,8 +69,13 @@ export const Input = styled.input`
 
 export const IconBox = styled.div`
     display: flex;
+    justify-content: flex-end;
     gap: 8px;
     margin-top: 5.3rem;
+  
+  svg {
+      cursor: pointer;
+  }
 `
 
 export const Border = styled.div`

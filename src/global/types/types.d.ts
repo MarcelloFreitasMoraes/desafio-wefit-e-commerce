@@ -4,18 +4,8 @@ export interface DataProps {
     image: string
     price: number
     title: string
+    total: number
 }
-
-export interface Item {
-    amount: number
-    id: number
-    image: string
-    price: number
-    title: string
+export interface ProductList {
+    [key: string]: Product;
 }
-
-export interface Data {
-    [key: string]: Item
-}
-
-export type DataPo = Data

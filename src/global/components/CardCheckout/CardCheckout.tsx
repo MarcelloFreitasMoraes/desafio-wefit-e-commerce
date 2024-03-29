@@ -4,7 +4,7 @@ import TypographicComponent from '../Typographic/Typographic';
 import { CardCheckoutProps } from './types';
 import ProductRenderer from './ProductRenderer';
 
-const CardCheckout: React.FC<CardCheckoutProps> = ({ data, price }) => {
+const CardCheckout: React.FC<CardCheckoutProps> = ({ data, price }) => { 
   return (
     <S.Container>
       {data && <ProductRenderer data={data} />}
@@ -15,7 +15,7 @@ const CardCheckout: React.FC<CardCheckoutProps> = ({ data, price }) => {
           <TypographicComponent
             medium
             primary
-            title="SUBTOTAL"
+            title="TOTAL"
             weight="bold"
           />
           <TypographicComponent

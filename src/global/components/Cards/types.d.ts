@@ -1,8 +1,6 @@
+import { ProductList } from "@/global/types/types"
 export interface CardProps {
-    amount?: number
-    image?: string
-    price?: number
-    title?: string
-    data?:any
+    data?: ProductList
+    amount?: number | undefined
     action: () => void
 }
