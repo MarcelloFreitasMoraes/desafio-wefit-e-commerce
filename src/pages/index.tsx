@@ -8,7 +8,7 @@ import useCheckoutData from '@/global/hooks/useCheckoutData'
 export default function Home() {
     const { ListProductsQuery, LoadingListProducts } =
         useProductsData()
-    const { CheckoutQuery, CheckoutMutation } = useCheckoutData()
+    const { CheckoutQuery, CheckoutMutation, LoadingCheckout } = useCheckoutData()
     const amounts = CheckoutQuery?.data ? Object.values(CheckoutQuery.data) : [];
     
     return (
@@ -17,13 +17,13 @@ export default function Home() {
                 <title>Desafio WeFit</title>
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-            {LoadingListProducts ? (
+            {LoadingListProducts || LoadingCheckout ? (
                 <Loading />
             ) : (
                 <S.ContainerCards>
                     {ListProductsQuery?.data &&
                         Object.entries(ListProductsQuery?.data)?.map((x) => {
-                            const product = x[1]
+                            const product = x[1]                            
                             const amount =
                                 amounts.find(
                                     (item: { id: number }) =>

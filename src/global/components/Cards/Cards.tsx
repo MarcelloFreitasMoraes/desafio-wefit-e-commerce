@@ -5,7 +5,7 @@ import { MeCar } from '@/global/assets/icons/MeCar'
 import TypographicComponent from '../Typographic/Typographic'
 import { CardProps } from './types'
 
-const Cards: React.FC<CardProps> = ({ data, action, amount = 0 }) => {   
+const Cards: React.FC<CardProps> = ({ data, action, amount = 0 }) => {
     return (
         <S.Container>
             <S.Box>
@@ -33,9 +33,14 @@ const Cards: React.FC<CardProps> = ({ data, action, amount = 0 }) => {
                 </S.Info>
             </S.Box>
             <S.ContentButton>
-                <S.Button onClick={action} backgoundColor={amount > 0} disabled={amount > 0} >
+                <S.Button
+                    onClick={action}
+                    backgoundColor={amount > 0}
+                    disabled={amount > 0}
+                >
                     <MeCar />
-                    <span>{amount}</span>{`${amount > 0 ? ' VÁ PARA O CARRINHO' : 'ADICIONAR AO CARRINHO    '} `}
+                    <span>{amount}</span>
+                    {`${amount > 0 ? ' VÁ PARA O CARRINHO' : 'ADICIONAR AO CARRINHO    '} `}
                 </S.Button>
             </S.ContentButton>
         </S.Container>

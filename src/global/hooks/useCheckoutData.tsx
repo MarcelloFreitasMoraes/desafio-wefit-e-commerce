@@ -13,7 +13,7 @@ export default function useCheckoutData(id?: string | string[] | undefined) {
             http
                 .get(`checkout.json`)
                 .then((res) => {
-                    return res.data || []
+                    return res.data || {}
                 })
                 .catch((err) => err),
         {
@@ -42,12 +42,12 @@ export default function useCheckoutData(id?: string | string[] | undefined) {
                 let newTotal
                 const response =
                     query.data && Object.entries(query.data)[0]?.[1]
-                let currentAmount: number = response?.amount
+                let currentAmount = 1
                 const newAmount = decrement
                     ? currentAmount - 1
                     : currentAmount + 1
 
-                if (decrement && currentAmount > 0) {
+                if (decrement) {
                     newTotal = Math.abs(response?.price - response?.total)
                 } else {
                     newTotal = response?.price + response?.total
@@ -87,6 +87,26 @@ export default function useCheckoutData(id?: string | string[] | undefined) {
         }
     )
 
+    const DeleteAllItemsMutation = useMutation(
+        async () => {
+            try {
+                await http.delete('checkout.json');
+                query.refetch();
+            } catch (error) {
+                console.error(error);
+                throw error;
+            }
+        },
+        {
+            onSuccess: () => {
+                query.refetch();
+            },
+        }
+    );
+    
+    
+    
+
     useEffect(() => {
         const del = query.data && Object.entries(query.data)[0]?.[0]
         if (
@@ -105,9 +125,11 @@ export default function useCheckoutData(id?: string | string[] | undefined) {
             mutation.isLoading ||
             query.isLoading ||
             Editmutation.isLoading ||
-            Deletemutation.isLoading,
+            Deletemutation.isLoading ||
+            DeleteAllItemsMutation.isLoading,
         CheckoutRefetch: query.refetch(),
         Edit: Editmutation,
         DeleteMutation: Deletemutation,
+        DeleteAllItemsMutation,
     }
 }

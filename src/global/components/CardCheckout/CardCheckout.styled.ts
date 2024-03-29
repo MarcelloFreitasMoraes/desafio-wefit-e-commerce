@@ -99,6 +99,7 @@ export const Button = styled.button`
     background-color: ${(props) => props.theme.colors.primary};
     color: ${(props) => props.theme.colors.white};
     border: none;
+    cursor: pointer;
 `
 
 export const BoxTotal = styled.div`

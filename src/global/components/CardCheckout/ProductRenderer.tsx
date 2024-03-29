@@ -13,9 +13,7 @@ const ProductRenderer: React.FC<CardCheckoutProps> = ({ data }) => {
     <>
       {data && Object.entries(data)?.map(([key, product], index, arr) => {
         const isUnique = arr.findIndex(([_, p]) => p.id === product.id) === index;
-        console.log(product, 'product');
-        console.log(data, 'data');
-        // Se o produto for único, renderiza
+
         if (isUnique) {
           return (
             <S.Grid key={product.id}>
@@ -88,7 +86,6 @@ const ProductRenderer: React.FC<CardCheckoutProps> = ({ data }) => {
             </S.Grid>
           );
         }
-        // Se não for único, não renderiza nada
         return null;
       })}
     </>

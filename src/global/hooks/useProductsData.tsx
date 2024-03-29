@@ -6,13 +6,13 @@ import { ProductList } from '../types/types'
 export const ProductsKey = 'ProductsData'
 
 export default function useProductsData(id?: string | string[] | undefined) { 
-    const query = useQuery<ProductList[]>(
+    const query = useQuery<ProductList>(
         [ProductsKey, id],
         () =>
             http
                 .get(id ? `products/${id}.json/` : `products.json`)
                 .then((res) => {
-                    return res?.data || []
+                    return res?.data || {}
                 })
                 .catch((err) => err),
         {

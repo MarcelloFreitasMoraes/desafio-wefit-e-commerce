@@ -21,6 +21,10 @@ const BaseLayout: React.FC<BaseLayoutProps> = ({ children, offInput }) => {
         itemCount = CheckoutQuery.data && Object.keys(CheckoutQuery.data).length
     }
 
+    const removeAccents = (str: string) => {
+        return str.normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+    }
+
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const inputValue = event.target.value
         setValue(inputValue)
@@ -28,18 +32,16 @@ const BaseLayout: React.FC<BaseLayoutProps> = ({ children, offInput }) => {
         const filteredData =
             ListProductsQuery?.data &&
             Object.entries(ListProductsQuery.data).filter(([key, value]) =>
-                value.title.toLowerCase().includes(inputValue.toLowerCase())
+                removeAccents(value.title.toLowerCase()).includes(
+                    removeAccents(inputValue.toLowerCase())
+                )
             )
 
         setData(filteredData)
     }
-    
+
     const handleSearch = () => {
-        if (value.trim() !== '') {
-            if (data && data.length > 0) {
-                router.push(`/search?id=${data[0][0]}`)
-            }
-        }
+        router.push(`/search?id=${data[0]?.[0]}`)
     }
 
     return (
