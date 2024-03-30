@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import stale from '@/global/utils/stale'
 import { http } from '@/pages/api/api'
 import { useMutation, useQuery } from '@tanstack/react-query'
@@ -144,7 +145,7 @@ export default function useCheckoutData(id?: string | string[] | undefined) {
         ) {
             Deletemutation.mutate(del)
         }
-    }, [Deletemutation, query.data])
+    }, [query.data])
 
     return {
         CheckoutQuery: query,
