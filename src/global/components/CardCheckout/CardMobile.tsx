@@ -24,7 +24,7 @@ const CardMobile: React.FC<CardCheckoutProps> = ({ data, price }) => {
 
     const handleFinish = () => {
         DeleteAllItemsMutation.mutate()
-        router.push('/purchase')
+        router.push('/Purchase')
     }
 
     return (

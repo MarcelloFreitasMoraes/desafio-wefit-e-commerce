@@ -4,11 +4,33 @@ import { useRouter } from 'next/router'
 import useProductsData from '@/global/hooks/useProductsData'
 import useCheckoutData from '@/global/hooks/useCheckoutData'
 import Empty from '@/global/components/Empty/Empty'
+import { useEffect, useState } from 'react'
+import Logo from '../../../public/not-product.png'
+import Mobile from '../../../public/not-product-mobile.png'
 
 const Search: React.FC = () => {
     const router = useRouter()
     const { id } = router.query
     const { ListProductsQuery, LoadingListProducts } = useProductsData(id)
+    const [windowWidth, setWindowWidth] = useState<number>(
+        typeof window !== 'undefined' ? window.innerWidth : 0
+    )
+    const Image = windowWidth <= 768 ? Mobile : Logo
+    const noInput = id !== 'undefined' ? false : true
+
+    useEffect(() => {
+        const handleResize = () => {
+            setWindowWidth(window.innerWidth)
+        }
+
+        window.addEventListener('resize', handleResize)
+
+        return () => {
+            window.removeEventListener('resize', handleResize)
+        }
+    }, [])
+    
+
     const { CheckoutQuery, CheckoutMutation } = useCheckoutData()
     const amounts = CheckoutQuery?.data ? Object.values(CheckoutQuery.data) : []
 
@@ -18,7 +40,7 @@ const Search: React.FC = () => {
         )?.amount || 0
 
     return (
-        <BaseLayout>
+        <BaseLayout offInput={noInput}>
             {LoadingListProducts ? (
                 <Loading />
             ) : (
@@ -36,9 +58,9 @@ const Search: React.FC = () => {
                             />
                         </S.ContainerCards>
                     ) : (
-                        <Empty
-                            image="/film.gif"
-                            title="Ops! nenhum filme encontrado."
+                      <Empty
+                            image={Image}
+                            title="Parece que não há nada por aqui :("
                         />
                     )}
                 </>

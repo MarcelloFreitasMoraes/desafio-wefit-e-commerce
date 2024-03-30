@@ -50,7 +50,7 @@ const BaseLayout: React.FC<BaseLayoutProps> = ({ children, offInput }) => {
 
     const handleSearch = () => {
         if (value.trim() !== '') {
-            router.push(`/search?id=${data[0]?.[0]}`)
+            router.push(`/Search?id=${data[0]?.[0]}`)
             setErrorMessage('')
         } else {
             setErrorMessage('Digite o nome do filme')
