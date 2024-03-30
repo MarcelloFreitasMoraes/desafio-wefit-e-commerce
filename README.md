@@ -57,21 +57,21 @@ Se possível, inclua o comando para iniciar o servidor da API no package.json do
 
 <div align="center">
   <p>Home</p>
-<img src="![image](https://github.com/MarcelloFreitasMoraes/desafio-wefit-e-commerce/assets/101751067/b2b86ab6-d472-47a7-871b-19c98b1991f3)
+<img src="[image](https://github.com/MarcelloFreitasMoraes/desafio-wefit-e-commerce/assets/101751067/b2b86ab6-d472-47a7-871b-19c98b1991f3)
 " width="700px" />
 </div>
 <br/>
 
 <div align="center">
   <p>Carrinho</p>
-<img src="![image](https://github.com/MarcelloFreitasMoraes/desafio-wefit-e-commerce/assets/101751067/3a02b2d8-9d06-4933-8736-23066fdfa6d9)
+<img src="[image](https://github.com/MarcelloFreitasMoraes/desafio-wefit-e-commerce/assets/101751067/3a02b2d8-9d06-4933-8736-23066fdfa6d9)
 " width="700px" />
 </div>
 <br/>
 
 <div align="center">
   <p>Compra realizada</p>
-<img src="![image](https://github.com/MarcelloFreitasMoraes/desafio-wefit-e-commerce/assets/101751067/295394cf-69f9-444a-ab49-b38970bf5e5f)
+<img src="[image](https://github.com/MarcelloFreitasMoraes/desafio-wefit-e-commerce/assets/101751067/295394cf-69f9-444a-ab49-b38970bf5e5f)
 " width="700px" />
 </div>
 <br/>
