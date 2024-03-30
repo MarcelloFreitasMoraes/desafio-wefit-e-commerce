@@ -36,7 +36,10 @@ const Search: React.FC = () => {
                             />
                         </S.ContainerCards>
                     ) : (
-                        <Empty image="/film.gif" title="Ops! nenhum filme encontrado." />
+                        <Empty
+                            image="/film.gif"
+                            title="Ops! nenhum filme encontrado."
+                        />
                     )}
                 </>
             )}

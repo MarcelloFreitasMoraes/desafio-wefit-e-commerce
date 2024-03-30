@@ -6,11 +6,11 @@ import { Fragment } from 'react'
 import useCheckoutData from '@/global/hooks/useCheckoutData'
 
 export default function Home() {
-    const { ListProductsQuery, LoadingListProducts } =
-        useProductsData()
-    const { CheckoutQuery, CheckoutMutation, LoadingCheckout } = useCheckoutData()
-    const amounts = CheckoutQuery?.data ? Object.values(CheckoutQuery.data) : [];
-    
+    const { ListProductsQuery, LoadingListProducts } = useProductsData()
+    const { CheckoutQuery, CheckoutMutation, LoadingCheckout } =
+        useCheckoutData()
+    const amounts = CheckoutQuery?.data ? Object.values(CheckoutQuery.data) : []
+
     return (
         <BaseLayout>
             <Head>
@@ -23,19 +23,23 @@ export default function Home() {
                 <S.ContainerCards>
                     {ListProductsQuery?.data &&
                         Object.entries(ListProductsQuery?.data)?.map((x) => {
-                            const product = x[1]                            
+                            const product = x[1]
                             const amount =
                                 amounts.find(
                                     (item: { id: number }) =>
                                         item.id === product.id
-                                )?.amount || 0                               
+                                )?.amount || 0
 
                             return (
                                 <Fragment key={product?.id}>
                                     <Cards
                                         data={product}
                                         amount={amount}
-                                        action={() => CheckoutMutation.mutate({ ...product })}
+                                        action={() =>
+                                            CheckoutMutation.mutate({
+                                                ...product,
+                                            })
+                                        }
                                     />
                                 </Fragment>
                             )

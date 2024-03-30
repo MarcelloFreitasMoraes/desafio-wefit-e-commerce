@@ -18,7 +18,11 @@ const Purchase: React.FC = () => {
                     weight="bold"
                 />
                 <Image src={Logo} alt="car" />
-                <Button onClick={() => router.push(`/`)} label='Voltar' width='173px' />                  
+                <Button
+                    onClick={() => router.push(`/`)}
+                    label="Voltar"
+                    width="173px"
+                />
             </S.Container>
         </BaseLayout>
     )

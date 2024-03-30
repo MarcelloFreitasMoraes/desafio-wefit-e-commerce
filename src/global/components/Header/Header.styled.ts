@@ -15,7 +15,7 @@ export const Content = styled.div`
     display: flex;
     align-items: center;
     padding-left: 10px;
-     cursor: pointer;
+    cursor: pointer;
 `
 export const ContentText = styled.div`
     display: flex;

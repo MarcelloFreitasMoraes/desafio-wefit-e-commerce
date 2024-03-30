@@ -72,10 +72,10 @@ export const IconBox = styled.div`
     justify-content: flex-end;
     gap: 8px;
     margin-top: 5.3rem;
-  
-  svg {
-      cursor: pointer;
-  }
+
+    svg {
+        cursor: pointer;
+    }
 `
 
 export const Border = styled.div`

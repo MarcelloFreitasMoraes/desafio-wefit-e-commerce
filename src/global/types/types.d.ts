@@ -7,5 +7,5 @@ export interface DataProps {
     total: number
 }
 export interface ProductList {
-    [key: string]: Product;
+    [key: string]: Product
 }

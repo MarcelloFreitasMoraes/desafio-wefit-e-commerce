@@ -1,12 +1,12 @@
-import React from "react";
-import { Box, Spinner } from "./Loading.styled";
+import React from 'react'
+import { Box, Spinner } from './Loading.styled'
 
 const LoadingSpinner: React.FC = () => {
-  return (
-    <Box>
-      <Spinner />
-    </Box>
-  );
-};
+    return (
+        <Box>
+            <Spinner />
+        </Box>
+    )
+}
 
-export default LoadingSpinner;
+export default LoadingSpinner

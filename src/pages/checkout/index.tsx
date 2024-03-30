@@ -31,7 +31,7 @@ const Checkout: React.FC = () => {
               0
           )
         : 0
-const Image = windowWidth <= 768 ? Mobile : Logo
+    const Image = windowWidth <= 768 ? Mobile : Logo
     return (
         <BaseLayout offInput>
             {LoadingCheckout ? (
@@ -54,7 +54,10 @@ const Image = windowWidth <= 768 ? Mobile : Logo
                             )}
                         </>
                     ) : (
-                        <Empty image={Image} title='Parece que não há nada por aqui :('/>
+                        <Empty
+                            image={Image}
+                            title="Parece que não há nada por aqui :("
+                        />
                     )}
                 </>
             )}

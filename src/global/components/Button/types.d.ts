@@ -1,5 +1,5 @@
 export interface ButtonProps {
-    onClick:() => void
+    onClick: () => void
     label: string
     width?: string
     disabled?: boolean

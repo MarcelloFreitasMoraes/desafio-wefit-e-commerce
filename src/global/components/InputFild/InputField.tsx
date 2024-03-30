@@ -25,7 +25,7 @@ const InputField: React.FC<InputFieldProps> = ({
                 }}
             />
             <S.SearchIcon onClick={onSearch}>
-                <Search color={isFocused ? '' : theme.colors.disabled}/>
+                <Search color={isFocused ? '' : theme.colors.disabled} />
             </S.SearchIcon>
         </S.InputContainer>
     )

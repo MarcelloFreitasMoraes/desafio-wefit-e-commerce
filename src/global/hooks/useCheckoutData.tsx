@@ -8,8 +8,8 @@ import { useAlert } from '../Provider/Alert/Alert'
 export const CheckoutKey = 'CheckoutData'
 
 export default function useCheckoutData(id?: string | string[] | undefined) {
-    const { showAlert } = useAlert() 
-    
+    const { showAlert } = useAlert()
+
     const query = useQuery<ProductList>(
         [CheckoutKey, id],
         () =>
@@ -79,7 +79,7 @@ export default function useCheckoutData(id?: string | string[] | undefined) {
         },
         {
             onSuccess: () => {
-                query.refetch()            
+                query.refetch()
             },
             onError: () => {
                 showAlert(
@@ -87,7 +87,6 @@ export default function useCheckoutData(id?: string | string[] | undefined) {
                     'Ops, ocorreu um erro desconhecido. Contate um administrador.'
                 )
             },
-            
         }
     )
 
@@ -123,10 +122,7 @@ export default function useCheckoutData(id?: string | string[] | undefined) {
             try {
                 await http.delete('checkout.json')
                 query.refetch()
-                showAlert(
-                    'success',
-                    'Sucesso! Compra realizada com sucesso.'
-                )
+                showAlert('success', 'Sucesso! Compra realizada com sucesso.')
             } catch (error) {
                 console.error(error)
                 throw error

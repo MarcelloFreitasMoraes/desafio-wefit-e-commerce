@@ -5,7 +5,7 @@ import { ProductList } from '../types/types'
 
 export const ProductsKey = 'ProductsData'
 
-export default function useProductsData(id?: string | string[] | undefined) { 
+export default function useProductsData(id?: string | string[] | undefined) {
     const query = useQuery<ProductList>(
         [ProductsKey, id],
         () =>
@@ -20,10 +20,10 @@ export default function useProductsData(id?: string | string[] | undefined) {
             cacheTime: 0,
             enabled: true,
         }
-    )    
-    
+    )
+
     return {
-        ListProductsQuery: query,       
+        ListProductsQuery: query,
         LoadingListProducts: query.isLoading,
     }
 }
