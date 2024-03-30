@@ -10,7 +10,7 @@ const Empty: React.FC<EmptyProps> = ({ image, title }) => {
     const router = useRouter()
     return (
         <S.Container>
-            <TypographicComponent large primary title={title} weight="bold" />
+            <TypographicComponent large primary={'true'} title={title} weight="bold" />
             <S.ImageBox>
                 <Image src={image} layout="fill" alt="reload" />
             </S.ImageBox>

@@ -48,7 +48,7 @@ const CardMobile: React.FC<CardCheckoutProps> = ({ data, price }) => {
                                         <div>
                                             <TypographicComponent
                                                 medium
-                                                primary
+                                                primary={'true'}
                                                 title={product.title}
                                                 weight="bold"
                                             />
@@ -75,7 +75,7 @@ const CardMobile: React.FC<CardCheckoutProps> = ({ data, price }) => {
                                         <S.Text>
                                             <TypographicComponent
                                                 regular
-                                                primary
+                                                primary={'true'}
                                                 title={`R$ ${product.price?.toLocaleString(
                                                     'pt-BR',
                                                     {
@@ -98,13 +98,13 @@ const CardMobile: React.FC<CardCheckoutProps> = ({ data, price }) => {
                                             <S.ContentQtd>
                                                 <TypographicComponent
                                                     medium
-                                                    primary
+                                                    primary={'true'}
                                                     title="SUBTOTAL"
                                                     weight="bold"
                                                 />
                                                 <TypographicComponent
                                                     regular
-                                                    primary
+                                                    primary={'true'}
                                                     title={`R$ ${product.total?.toLocaleString(
                                                         'pt-BR',
                                                         {
@@ -127,13 +127,13 @@ const CardMobile: React.FC<CardCheckoutProps> = ({ data, price }) => {
                 <S.BoxTotal>
                     <TypographicComponent
                         medium
-                        primary
+                        primary={'true'}
                         title="TOTAL"
                         weight="bold"
                     />
                     <TypographicComponent
                         regular
-                        primary
+                        primary={'true'}
                         title={`R$ ${price?.toLocaleString('pt-BR', {
                             minimumFractionDigits: 2,
                         })}`}

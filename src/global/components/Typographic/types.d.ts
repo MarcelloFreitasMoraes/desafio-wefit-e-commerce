@@ -5,11 +5,11 @@ export interface IcontentProps {
     regular?: boolean
     description?: boolean
     title: string
-    primary?: boolean
+    primary?: string
     weight?: 'light' | 'normal' | 'semi-bold' | 'bold'
 }
 
 export interface IPrimaryColorProps {
-    primary?: boolean
+    primary?: string
     weight?: 'light' | 'normal' | 'semi-bold' | 'bold'
 }

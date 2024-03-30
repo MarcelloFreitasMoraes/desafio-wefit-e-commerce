@@ -13,7 +13,7 @@ const Purchase: React.FC = () => {
             <S.Container>
                 <TypographicComponent
                     large
-                    primary
+                    primary={'true'}
                     title={'Compra realizada com sucesso!'}
                     weight="bold"
                 />

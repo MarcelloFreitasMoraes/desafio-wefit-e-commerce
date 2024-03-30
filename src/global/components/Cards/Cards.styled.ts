@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 interface ButtonProps {
-    backgoundColor: boolean
+    backgroundcolor?: string
     disabled: boolean
 }
 
@@ -32,10 +32,7 @@ export const ContentButton = styled.div`
     }
 `
 export const Button = styled.button<ButtonProps>`
-    background-color: ${(props) =>
-        props.backgoundColor
-            ? props.theme.colors.green
-            : props.theme.colors.primary};
+    background-color: ${(props) =>  props.backgroundcolor};
     color: ${(props) => props.theme.colors.white};
     width: 306.67px;
     height: 40px;

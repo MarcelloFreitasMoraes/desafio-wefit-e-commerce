@@ -4,6 +4,7 @@ import * as S from './Cards.styled'
 import { MeCar } from '@/global/assets/icons/MeCar'
 import TypographicComponent from '../Typographic/Typographic'
 import { CardProps } from './types'
+import theme from '@/styles/theme/theme'
 
 const Cards: React.FC<CardProps> = ({ data, action, amount = 0 }) => {
     return (
@@ -18,13 +19,13 @@ const Cards: React.FC<CardProps> = ({ data, action, amount = 0 }) => {
                 <S.Info>
                     <TypographicComponent
                         description
-                        primary
+                        primary={'true'}
                         title={data?.title}
                         weight="bold"
                     />
                     <TypographicComponent
                         regular
-                        primary
+                        primary={'true'}
                         title={`R$ ${data?.price?.toLocaleString('pt-BR', {
                             minimumFractionDigits: 2,
                         })}`}
@@ -35,7 +36,9 @@ const Cards: React.FC<CardProps> = ({ data, action, amount = 0 }) => {
             <S.ContentButton>
                 <S.Button
                     onClick={action}
-                    backgoundColor={amount > 0}
+                    backgroundcolor={
+                        amount > 0 ? theme.colors.green : theme.colors.primary
+                    }
                     disabled={amount > 0}
                 >
                     <MeCar />

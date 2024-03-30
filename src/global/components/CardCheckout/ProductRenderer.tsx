@@ -22,7 +22,7 @@ const ProductRenderer: React.FC<CardCheckoutProps> = ({ data }) => {
                                 <S.ContentProduto>
                                     <TypographicComponent
                                         medium
-                                        primary
+                                        primary={'true'}
                                         title="PRODUTO"
                                         weight="bold"
                                     />
@@ -36,13 +36,13 @@ const ProductRenderer: React.FC<CardCheckoutProps> = ({ data }) => {
                                         <S.Box>
                                             <TypographicComponent
                                                 medium
-                                                primary
+                                                primary={'true'}
                                                 title={product.title}
                                                 weight="bold"
                                             />
                                             <TypographicComponent
                                                 regular
-                                                primary
+                                                primary={'true'}
                                                 title={`R$ ${product.price?.toLocaleString(
                                                     'pt-BR',
                                                     {
@@ -57,7 +57,7 @@ const ProductRenderer: React.FC<CardCheckoutProps> = ({ data }) => {
                                 <S.ContentQtd>
                                     <TypographicComponent
                                         medium
-                                        primary
+                                        primary={'true'}
                                         title="QTD"
                                         weight="bold"
                                     />
@@ -88,14 +88,14 @@ const ProductRenderer: React.FC<CardCheckoutProps> = ({ data }) => {
                                 <S.ContentSub>
                                     <TypographicComponent
                                         medium
-                                        primary
+                                        primary={'true'}
                                         title="SUBTOTAL"
                                         weight="bold"
                                     />
                                     <S.BoxInput>
                                         <TypographicComponent
                                             regular
-                                            primary
+                                            primary={'true'}
                                             title={`R$ ${product.total?.toLocaleString(
                                                 'pt-BR',
                                                 {

@@ -2,8 +2,7 @@ import styled, { css } from 'styled-components'
 import { IPrimaryColorProps } from './types'
 
 const baseStyles = css<IPrimaryColorProps>`
-    color: ${(props) =>
-        props.primary ? props.theme.colors.text : props.theme.colors.white};
+    color: ${(props) => props.primary ? props.theme.colors.text : props.theme.colors.white};
     font-weight: ${(props) => {
         switch (props.weight) {
             case 'light':

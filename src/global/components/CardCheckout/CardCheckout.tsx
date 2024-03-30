@@ -29,13 +29,13 @@ const CardCheckout: React.FC<CardCheckoutProps> = ({ data, price }) => {
                 <S.BoxTotal>
                     <TypographicComponent
                         medium
-                        primary
+                        primary={'true'}
                         title="TOTAL"
                         weight="bold"
                     />
                     <TypographicComponent
                         regular
-                        primary
+                        primary={'true'}
                         title={`R$ ${price?.toLocaleString('pt-BR', {
                             minimumFractionDigits: 2,
                         })}`}

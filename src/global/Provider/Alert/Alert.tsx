@@ -34,7 +34,6 @@ type AlertProviderProps = {
 
 export const AlertProvider: React.FC<AlertProviderProps> = ({ children }) => {
     const [alertInfo, setAlertInfo] = useState<AlertProps | null>(null)
-    console.log(alertInfo, 'alertInfo')
     const showAlert = (type: 'success' | 'error', message: string) => {
         setAlertInfo({ type, message })
     }

@@ -11,12 +11,17 @@ export const AlertContainer = styled.div<Props>`
     align-items: center;
     justify-content: center;
     padding: 10px 20px;
+    max-width: 1040px;
     width: 100%;
+    margin: 0 auto;
     background-color: ${(props) => props.backgroundColor};
     border: none;
+    border-radius: 8px;
     position: fixed;
-    z-index: 9999;
-    top: 0;
+    /* z-index: 99; */
+    top: 20px;
+    right: 0;
+    left: 0;
 
     p {
         padding: 0 10px;
