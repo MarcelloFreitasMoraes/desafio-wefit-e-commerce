@@ -57,22 +57,19 @@ Se possível, inclua o comando para iniciar o servidor da API no package.json do
 
 <div align="center">
   <p>Home</p>
-<img src="[image](https://github.com/MarcelloFreitasMoraes/desafio-wefit-e-commerce/assets/101751067/b2b86ab6-d472-47a7-871b-19c98b1991f3)
-" width="700px" />
+<img src="![Captura de tela 2024-03-30 021255](https://github.com/MarcelloFreitasMoraes/desafio-wefit-e-commerce/assets/101751067/d1d54267-fa72-496e-807f-449b67fc40da)" width="700px" />
 </div>
 <br/>
 
 <div align="center">
   <p>Carrinho</p>
-<img src="[image](https://github.com/MarcelloFreitasMoraes/desafio-wefit-e-commerce/assets/101751067/3a02b2d8-9d06-4933-8736-23066fdfa6d9)
-" width="700px" />
+<img src="![Captura de tela 2024-03-30 021356](https://github.com/MarcelloFreitasMoraes/desafio-wefit-e-commerce/assets/101751067/7500ba43-0939-4d1c-9bc9-69d199323a17)" width="700px" />
 </div>
 <br/>
 
 <div align="center">
   <p>Compra realizada</p>
-<img src="[image](https://github.com/MarcelloFreitasMoraes/desafio-wefit-e-commerce/assets/101751067/295394cf-69f9-444a-ab49-b38970bf5e5f)
-" width="700px" />
+<img src="![Captura de tela 2024-03-30 021448](https://github.com/MarcelloFreitasMoraes/desafio-wefit-e-commerce/assets/101751067/cbc17d8f-f30c-4906-ae19-7cd354f125fd)" width="700px" />
 </div>
 <br/>
 
