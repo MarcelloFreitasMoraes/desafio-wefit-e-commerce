@@ -14,7 +14,7 @@ const CardCheckout: React.FC<CardCheckoutProps> = ({ data, price }) => {
         DeleteAllItemsMutation.mutate()
         router.push(`/purchase`)
     }
-
+    
     return (
         <S.Container>
             {data && <ProductRenderer data={data} />}

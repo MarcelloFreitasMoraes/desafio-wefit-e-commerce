@@ -47,7 +47,7 @@ const BaseLayout: React.FC<BaseLayoutProps> = ({ children, offInput }) => {
     return (
         <Container>
             <Header amount={itemCount || 0} />
-            <div>
+            <S.ContainerInput>
                 {!offInput && (
                     <>
                         <InputField
@@ -58,7 +58,7 @@ const BaseLayout: React.FC<BaseLayoutProps> = ({ children, offInput }) => {
                         />
                     </>
                 )}
-            </div>
+            </S.ContainerInput>
             <S.ContainerChildren>{children}</S.ContainerChildren>
         </Container>
     )

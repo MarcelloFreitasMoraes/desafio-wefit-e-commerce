@@ -40,17 +40,16 @@ export default function useCheckoutData(id?: string | string[] | undefined) {
         async ({ id, decrement }: { id: string; decrement?: boolean }) => {
             try {
                 let newTotal
-                const response =
-                    query.data && Object.entries(query.data)[0]?.[1]
-                let currentAmount = 1
+                const response = await http.get(`checkout/${id}.json/`);
+                const currentAmount = response?.data?.amount;          
+                
                 const newAmount = decrement
                     ? currentAmount - 1
                     : currentAmount + 1
-
                 if (decrement) {
-                    newTotal = Math.abs(response?.price - response?.total)
+                    newTotal = Math.abs(response?.data?.price - response?.data?.total)
                 } else {
-                    newTotal = response?.price + response?.total
+                    newTotal = response?.data?.price + response?.data?.total
                 }
 
                 await http.patch(`checkout/${id}.json/`, {
@@ -102,10 +101,7 @@ export default function useCheckoutData(id?: string | string[] | undefined) {
                 query.refetch();
             },
         }
-    );
-    
-    
-    
+    ); 
 
     useEffect(() => {
         const del = query.data && Object.entries(query.data)[0]?.[0]

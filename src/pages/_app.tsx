@@ -1,4 +1,3 @@
-import {  } from '@/global/components'
 import '@/styles/globals.css'
 import theme from '@/styles/theme/theme'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
