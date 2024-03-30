@@ -144,7 +144,7 @@ export default function useCheckoutData(id?: string | string[] | undefined) {
         ) {
             Deletemutation.mutate(del)
         }
-    }, [query.data])
+    }, [Deletemutation, query.data])
 
     return {
         CheckoutQuery: query,
