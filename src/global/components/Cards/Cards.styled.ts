@@ -1,8 +1,8 @@
 import styled from 'styled-components'
 
 interface ButtonProps {
-   backgoundColor: boolean
-   disabled: boolean
+    backgoundColor: boolean
+    disabled: boolean
 }
 
 export const Container = styled.div`
@@ -26,19 +26,22 @@ export const Info = styled.div`
 export const ContentButton = styled.div`
     display: flex;
     align-items: center;
-    
-    span{
+
+    span {
         padding: 0 5px;
     }
 `
 export const Button = styled.button<ButtonProps>`
-background-color: ${(props) => props.backgoundColor ? props.theme.colors.green : props.theme.colors.primary};
+    background-color: ${(props) =>
+        props.backgoundColor
+            ? props.theme.colors.green
+            : props.theme.colors.primary};
     color: ${(props) => props.theme.colors.white};
     width: 306.67px;
     height: 40px;
     padding: 8px;
     gap: 12px;
     border-radius: 4px;
-    border: none;   
-    cursor: ${(props) => props.disabled ? 'inherit' : 'pointer'};    
+    border: none;
+    cursor: ${(props) => (props.disabled ? 'inherit' : 'pointer')};
 `

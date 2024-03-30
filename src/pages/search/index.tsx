@@ -3,7 +3,7 @@ import * as S from './SpecificFilme.styled'
 import { useRouter } from 'next/router'
 import useProductsData from '@/global/hooks/useProductsData'
 import useCheckoutData from '@/global/hooks/useCheckoutData'
-import NotProducts from '@/global/components/NotProducts/NotProducts'
+import Empty from '@/global/components/Empty/Empty'
 
 const Search: React.FC = () => {
     const router = useRouter()
@@ -36,7 +36,7 @@ const Search: React.FC = () => {
                             />
                         </S.ContainerCards>
                     ) : (
-                        <NotProducts />
+                        <Empty image="/film.gif" title="Ops! nenhum filme encontrado." />
                     )}
                 </>
             )}

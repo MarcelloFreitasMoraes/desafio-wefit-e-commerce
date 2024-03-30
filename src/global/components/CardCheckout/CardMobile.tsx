@@ -8,6 +8,7 @@ import { CardCheckoutProps } from './types';
 import { Smaller } from '@/global/assets/icons/Smaller';
 import { More } from '@/global/assets/icons/More';
 import { Delete } from '@/global/assets/icons/Delete';
+import { Button } from '..';
 
 const CardMobile: React.FC<CardCheckoutProps> = ({ data, price }) => {
     const router = useRouter();
@@ -125,7 +126,11 @@ const CardMobile: React.FC<CardCheckoutProps> = ({ data, price }) => {
                         weight="bold"
                     />
                 </S.BoxTotal>
-                <S.Button onClick={handleFinish}>FINALIZAR PEDIDO</S.Button>
+                <Button
+                    onClick={handleFinish}
+                    label="FINALIZAR PEDIDO"
+                    width="173px"
+                />
             </>
         </S.Conteiners>
     );

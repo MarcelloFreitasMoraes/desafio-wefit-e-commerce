@@ -5,6 +5,7 @@ import { CardCheckoutProps } from './types'
 import ProductRenderer from './ProductRenderer'
 import useCheckoutData from '@/global/hooks/useCheckoutData'
 import { useRouter } from 'next/router'
+import { Button } from '..'
 
 const CardCheckout: React.FC<CardCheckoutProps> = ({ data, price }) => {
     const { DeleteAllItemsMutation } = useCheckoutData()
@@ -14,13 +15,17 @@ const CardCheckout: React.FC<CardCheckoutProps> = ({ data, price }) => {
         DeleteAllItemsMutation.mutate()
         router.push(`/purchase`)
     }
-    
+
     return (
         <S.Container>
             {data && <ProductRenderer data={data} />}
             <S.Border />
             <S.ButtonBox>
-                <S.Button onClick={handleFinish}>FINALIZAR PEDIDO</S.Button>
+                <Button
+                    onClick={handleFinish}
+                    label="FINALIZAR PEDIDO"
+                    width="173px"
+                />
                 <S.BoxTotal>
                     <TypographicComponent
                         medium

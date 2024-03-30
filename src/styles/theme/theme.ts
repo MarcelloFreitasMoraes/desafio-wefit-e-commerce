@@ -8,7 +8,7 @@ export const theme = {
     disabled: "#C0C0C0",
     green: "#039B00",
     error: "#e47755",
-    sucess: "#90EE90",
+    sucess: "rgba(144, 238, 144, 0.5)",
   },
   fonts: {
     fontSize: {

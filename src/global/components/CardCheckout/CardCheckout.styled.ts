@@ -90,18 +90,6 @@ export const ButtonBox = styled.div`
     align-items: center;
 `
 
-export const Button = styled.button`
-    width: 173px;
-    height: auto;
-    border-radius: 4px;
-    padding: 8px;
-    gap: 12px;
-    background-color: ${(props) => props.theme.colors.primary};
-    color: ${(props) => props.theme.colors.white};
-    border: none;
-    cursor: pointer;
-`
-
 export const BoxTotal = styled.div`
     display: flex;
     text-align: center;

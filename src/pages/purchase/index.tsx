@@ -4,7 +4,7 @@ import * as S from './purchase.styled'
 import TypographicComponent from '@/global/components/Typographic/Typographic'
 import { useRouter } from 'next/router'
 import Logo from '../../../public/complet.png'
-import { BaseLayout } from '@/global/components'
+import { BaseLayout, Button } from '@/global/components'
 
 const Purchase: React.FC = () => {
     const router = useRouter()
@@ -18,9 +18,7 @@ const Purchase: React.FC = () => {
                     weight="bold"
                 />
                 <Image src={Logo} alt="car" />
-                <S.Button onClick={() => router.push(`/`)}>
-                    Voltar
-                </S.Button>
+                <Button onClick={() => router.push(`/`)} label='Voltar' width='173px' />                  
             </S.Container>
         </BaseLayout>
     )
