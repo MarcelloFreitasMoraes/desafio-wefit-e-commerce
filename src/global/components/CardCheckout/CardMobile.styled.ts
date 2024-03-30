@@ -93,15 +93,3 @@ export const BoxTotal = styled.div`
         font-size: 24px;
     }
 `
-
-export const Button = styled.button`
-    width: 100%;
-    height: auto;
-    border-radius: 4px;
-    padding: 8px;
-    gap: 12px;
-    background-color: ${(props) => props.theme.colors.primary};
-    color: ${(props) => props.theme.colors.white};
-    border: none;
-    cursor: pointer;
-`
