@@ -7,6 +7,8 @@ export const theme = {
     white: "#FFFFFF",
     disabled: "#C0C0C0",
     green: "#039B00",
+    error: "#e47755",
+    sucess: "#90EE90",
   },
   fonts: {
     fontSize: {

@@ -1,29 +1,37 @@
-import React from 'react'
-import TypographicComponent from '../Typographic/Typographic'
-import Image from 'next/image'
-import * as S from './CardMobile.styled'
-import { CardCheckoutProps } from './types'
-import { Delete } from '@/global/assets/icons/Delete'
-import useCheckoutData from '@/global/hooks/useCheckoutData'
-import { Smaller } from '@/global/assets/icons/Smaller'
-import { More } from '@/global/assets/icons/More'
-import { useRouter } from 'next/router'
+import React from 'react';
+import Image from 'next/image';
+import { useRouter } from 'next/router';
+import TypographicComponent from '../Typographic/Typographic';
+import useCheckoutData from '@/global/hooks/useCheckoutData';
+import * as S from './CardMobile.styled';
+import { CardCheckoutProps } from './types';
+import { Smaller } from '@/global/assets/icons/Smaller';
+import { More } from '@/global/assets/icons/More';
+import { Delete } from '@/global/assets/icons/Delete';
 
 const CardMobile: React.FC<CardCheckoutProps> = ({ data, price }) => {
-    const router = useRouter()
-    const { Edit, DeleteMutation, DeleteAllItemsMutation } = useCheckoutData()
+    const router = useRouter();
+    const { Edit, DeleteMutation, DeleteAllItemsMutation } = useCheckoutData();
+
+    const handleEdit = (key: string, decrement: boolean) => {
+        Edit.mutate({ id: key, decrement });
+    };
+
+    const handleDelete = (key: string) => {
+        DeleteMutation.mutate(key);
+    };
 
     const handleFinish = () => {
-        DeleteAllItemsMutation.mutate()
-        router.push(`/purchase`)
-    }
+        DeleteAllItemsMutation.mutate();
+        router.push('/purchase');
+    };
 
     return (
         <S.Conteiners>
             {data &&
                 Object.entries(data)?.map(([key, product], index, arr) => {
                     const isUnique =
-                        arr.findIndex(([_, p]) => p.id === product.id) === index
+                        arr.findIndex(([_, p]) => p.id === product.id) === index;
 
                     if (isUnique) {
                         return (
@@ -45,27 +53,9 @@ const CardMobile: React.FC<CardCheckoutProps> = ({ data, price }) => {
                                             />
                                         </div>
                                         <S.BoxInput>
-                                            <Smaller
-                                                action={() => {
-                                                    Edit.mutate({
-                                                        id: key,
-                                                        decrement: true,
-                                                    })
-                                                }}
-                                            />
-                                            <S.Input
-                                                type="text"
-                                                disabled
-                                                value={product.amount}
-                                            />
-                                            <More
-                                                action={() => {
-                                                    Edit.mutate({
-                                                        id: key,
-                                                        decrement: false,
-                                                    })
-                                                }}
-                                            />
+                                            <Smaller action={() => handleEdit(key, true)} />
+                                            <S.Input type="text" disabled value={product.amount} />
+                                            <More action={() => handleEdit(key, false)} />
                                         </S.BoxInput>
                                     </S.Box>
                                     <S.Values>
@@ -87,11 +77,7 @@ const CardMobile: React.FC<CardCheckoutProps> = ({ data, price }) => {
                                                 <Delete
                                                     width={16}
                                                     height={18}
-                                                    action={() =>
-                                                        DeleteMutation.mutate(
-                                                            key
-                                                        )
-                                                    }
+                                                    action={() => handleDelete(key)}
                                                 />
                                             </div>
                                             <S.ContentQtd>
@@ -118,9 +104,9 @@ const CardMobile: React.FC<CardCheckoutProps> = ({ data, price }) => {
                                 </S.Content>
                                 <S.Border />
                             </div>
-                        )
+                        );
                     }
-                    return null
+                    return null;
                 })}
             <>
                 <S.BoxTotal>
@@ -142,7 +128,7 @@ const CardMobile: React.FC<CardCheckoutProps> = ({ data, price }) => {
                 <S.Button onClick={handleFinish}>FINALIZAR PEDIDO</S.Button>
             </>
         </S.Conteiners>
-    )
-}
+    );
+};
 
-export default CardMobile
+export default CardMobile;

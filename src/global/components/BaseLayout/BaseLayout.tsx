@@ -5,6 +5,7 @@ import { BaseLayoutProps } from './types'
 import useCheckoutData from '@/global/hooks/useCheckoutData'
 import useProductsData from '@/global/hooks/useProductsData'
 import { useRouter } from 'next/router'
+import TypographicComponent from '../Typographic/Typographic'
 
 const BaseLayout: React.FC<BaseLayoutProps> = ({ children, offInput }) => {
     const { CheckoutQuery } = useCheckoutData()
@@ -14,6 +15,7 @@ const BaseLayout: React.FC<BaseLayoutProps> = ({ children, offInput }) => {
     const [data, setData] = useState<any>(
         ListProductsQuery?.data && Object.entries(ListProductsQuery.data)
     )
+    const [errorMessage, setErrorMessage] = useState<string>('')
 
     let itemCount = 0
 
@@ -29,6 +31,12 @@ const BaseLayout: React.FC<BaseLayoutProps> = ({ children, offInput }) => {
         const inputValue = event.target.value
         setValue(inputValue)
 
+        if (inputValue.trim() === '') {
+            setErrorMessage('Digite o nome do filme')
+        } else {
+            setErrorMessage('')
+        }
+
         const filteredData =
             ListProductsQuery?.data &&
             Object.entries(ListProductsQuery.data).filter(([key, value]) =>
@@ -41,7 +49,12 @@ const BaseLayout: React.FC<BaseLayoutProps> = ({ children, offInput }) => {
     }
 
     const handleSearch = () => {
-        router.push(`/search?id=${data[0]?.[0]}`)
+        if (value.trim() !== '') {
+            router.push(`/search?id=${data[0]?.[0]}`)
+            setErrorMessage('')
+        } else {
+            setErrorMessage('Digite o nome do filme')
+        }
     }
 
     return (
@@ -56,6 +69,9 @@ const BaseLayout: React.FC<BaseLayoutProps> = ({ children, offInput }) => {
                             value={value}
                             data={data}
                         />
+                        {errorMessage && (
+                            <TypographicComponent small title={errorMessage} />
+                        )}
                     </>
                 )}
             </S.ContainerInput>
