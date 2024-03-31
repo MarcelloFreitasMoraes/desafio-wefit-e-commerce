@@ -99,13 +99,7 @@ export default function useCheckoutData(id?: string | string[] | undefined) {
                     'success',
                     'Sucesso! Seu produto foi removido do carrinho.'
                 )
-            },
-            onError: () => {
-                showAlert(
-                    'error',
-                    'Ops! Parece que houve um problema ao adicionar o item ao seu carrinho. Por favor, verifique sua conexão com a internet e tente novamente.'
-                )
-            },
+            },         
         }
     )
 
@@ -117,7 +111,6 @@ export default function useCheckoutData(id?: string | string[] | undefined) {
         {
             onSuccess: () => {
                 query.refetch()
-                showAlert('success', 'Sucesso! Compra realizada com sucesso.')
             },
         }
     )

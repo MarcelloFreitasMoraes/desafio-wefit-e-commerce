@@ -12,7 +12,7 @@ const Header: React.FC<HeaderProps> = ({ amount }) => {
             <span onClick={() => router.push(`/`)}>
                 <TypographicComponent large title="WeMovies" weight="bold" />
             </span>
-            <S.Content onClick={() => router.push(`/checkout`)}>
+            <S.Content onClick={() => router.push(`/Checkout`)}>
                 <S.ContentText>
                     <TypographicComponent
                         medium
