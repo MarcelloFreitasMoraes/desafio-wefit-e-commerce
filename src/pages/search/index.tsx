@@ -1,5 +1,5 @@
 import { BaseLayout, Cards, Loading } from '@/global/components'
-import * as S from './Search.styled'
+import * as S from '../../styles/Search.styled'
 import { useRouter } from 'next/router'
 import useProductsData from '@/global/hooks/useProductsData'
 import useCheckoutData from '@/global/hooks/useCheckoutData'

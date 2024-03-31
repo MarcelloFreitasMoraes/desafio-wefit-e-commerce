@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import React from 'react'
-import * as S from './Purchase.styled'
+import * as S from '../../styles/Purchase.styled'
 import TypographicComponent from '@/global/components/Typographic/Typographic'
 import { useRouter } from 'next/router'
 import Logo from '../../../public/complet.png'
