@@ -21,6 +21,10 @@ export const ContentText = styled.div`
     display: flex;
     flex-direction: column;
     align-items: flex-end;
+
+    p:nth-of-type(2) {
+        color: ${(props) => props.theme.colors.description};
+    }
 `
 export const BoxIcon = styled.div`
     padding-left: 10px;

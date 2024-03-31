@@ -3,34 +3,36 @@ import stale from '@/global/utils/stale'
 import { http } from '@/pages/api/api'
 import { useMutation, useQuery } from '@tanstack/react-query'
 import { ProductList } from '../types/types'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useAlert } from '../Provider/Alert/Alert'
 
 export const CheckoutKey = 'CheckoutData'
 
 export default function useCheckoutData(id?: string | string[] | undefined) {
     const { showAlert } = useAlert()
+    const [loading, setLoading] = useState<boolean>(false)
 
     const query = useQuery<ProductList>(
         [CheckoutKey, id],
-        () =>
-            http
+        () => {
+            return http
                 .get(`checkout.json`)
                 .then((res) => {
                     return res.data || {}
                 })
-                .catch((err) => err),
+                .catch((err) => err)
+        },
         {
             staleTime: stale.never,
             cacheTime: 0,
-            enabled: Boolean(id),
+            enabled: false,
         }
     )
 
     const mutation = useMutation(
         (values: ProductList) => {
             const method = 'post'
-            let body: any = { ...values, amount: values.amount + 1 }
+            const body: any = { ...values, amount: values.amount + 1 }
             return http[method](`checkout.json/`, body)
         },
         {
@@ -50,56 +52,45 @@ export default function useCheckoutData(id?: string | string[] | undefined) {
         }
     )
 
-    const Editmutation = useMutation(
+    const EditMutation = useMutation(
         async ({ id, decrement }: { id: string; decrement?: boolean }) => {
-            try {
-                let newTotal
-                const response = await http.get(`checkout/${id}.json/`)
-                const currentAmount = response?.data?.amount
-
-                const newAmount = decrement
-                    ? currentAmount - 1
-                    : currentAmount + 1
-                if (decrement) {
-                    newTotal = Math.abs(
-                        response?.data?.price - response?.data?.total
-                    )
-                } else {
-                    newTotal = response?.data?.price + response?.data?.total
-                }
-
-                await http.patch(`checkout/${id}.json/`, {
-                    amount: newAmount,
-                    total: newTotal,
-                })
-                query.refetch()
-            } catch (error) {
-                console.error(error)
-                throw error
+            const method = 'patch'
+            let newTotal
+            const response = await http.get(`checkout/${id}.json/`)
+            const currentAmount = response?.data?.amount
+            const newAmount = decrement ? currentAmount - 1 : currentAmount + 1
+          
+            if (decrement) {
+                newTotal = Math.abs(
+                    response?.data?.price - response?.data?.total
+                )
+            } else {
+                newTotal = response?.data?.price + response?.data?.total
             }
+            const bodyPatch = { amount: newAmount, total: newTotal }
+           
+            return http[method](`checkout/${id}.json/`, bodyPatch)
         },
         {
             onSuccess: () => {
                 query.refetch()
+                setLoading(true)
             },
             onError: () => {
                 showAlert(
                     'error',
-                    'Ops, ocorreu um erro desconhecido. Contate um administrador.'
+                    'Ops! Parece que houve um problema ao adicionar o item ao seu carrinho. Por favor, verifique sua conexão com a internet e tente novamente.'
                 )
+                setLoading(false)
             },
         }
     )
 
-    const Deletemutation = useMutation(
-        async (id: string) => {
-            try {
-                await http.delete(`checkout/${id}.json/`)
-                query.refetch()
-            } catch (error) {
-                console.error(error)
-                throw error
-            }
+    const DeleteMutation = useMutation(
+        (id?: string) => {
+            const method = 'delete'
+            const action = id ? `checkout/${id}.json/` : `checkout.json/`;
+            return http[method](`${action}`)
         },
         {
             onSuccess: () => {
@@ -119,19 +110,14 @@ export default function useCheckoutData(id?: string | string[] | undefined) {
     )
 
     const DeleteAllItemsMutation = useMutation(
-        async () => {
-            try {
-                await http.delete('checkout.json')
-                query.refetch()
-                showAlert('success', 'Sucesso! Compra realizada com sucesso.')
-            } catch (error) {
-                console.error(error)
-                throw error
-            }
+        () => {
+            const method = 'delete'
+            return http[method](`checkout.json/`)
         },
         {
             onSuccess: () => {
                 query.refetch()
+                showAlert('success', 'Sucesso! Compra realizada com sucesso.')
             },
         }
     )
@@ -143,22 +129,24 @@ export default function useCheckoutData(id?: string | string[] | undefined) {
             query.data &&
             Object.entries(query.data)[0]?.[1]?.amount === 0
         ) {
-            Deletemutation.mutate(del)
+            DeleteMutation.mutate(del)
         }
     }, [query.data])
 
     return {
         CheckoutQuery: query,
         CheckoutMutation: mutation,
+        EditMutation,
+        DeleteMutation,
+        DeleteAllItemsMutation,
+        loading,
         LoadingCheckout:
-            mutation.isLoading ||
             query.isLoading ||
-            Editmutation.isLoading ||
-            Deletemutation.isLoading ||
+            mutation.isLoading ||
+            EditMutation.isLoading ||
+            DeleteMutation.isLoading ||
+            loading ||
             DeleteAllItemsMutation.isLoading,
         CheckoutRefetch: query.refetch(),
-        Edit: Editmutation,
-        DeleteMutation: Deletemutation,
-        DeleteAllItemsMutation,
     }
 }

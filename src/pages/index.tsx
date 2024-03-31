@@ -1,12 +1,12 @@
 import { BaseLayout, Cards, Loading } from '@/global/components'
 import useProductsData from '@/global/hooks/useProductsData'
 import Head from 'next/head'
-import * as S from '../styles/Home.styled'
+import * as S from '../styles/styled'
 import { Fragment } from 'react'
 import useCheckoutData from '@/global/hooks/useCheckoutData'
 
 export default function Home() {
-    const { ListProductsQuery, LoadingListProducts } = useProductsData()
+    const { ListProductsQuery } = useProductsData()
     const { CheckoutQuery, CheckoutMutation, LoadingCheckout } =
         useCheckoutData()
     const amounts = CheckoutQuery?.data ? Object.values(CheckoutQuery.data) : []
@@ -17,7 +17,7 @@ export default function Home() {
                 <title>Desafio WeFit</title>
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-            {LoadingListProducts || LoadingCheckout ? (
+            {LoadingCheckout ? (
                 <Loading />
             ) : (
                 <S.ContainerCards>

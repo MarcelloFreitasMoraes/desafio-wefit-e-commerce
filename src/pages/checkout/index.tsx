@@ -8,7 +8,7 @@ import Logo from '../../../public/not-product.png'
 import Mobile from '../../../public/not-product-mobile.png'
 
 const Checkout: React.FC = () => {
-    const { CheckoutQuery, LoadingCheckout } = useCheckoutData()
+    const { CheckoutQuery, LoadingCheckout, loading } = useCheckoutData()
     const [windowWidth, setWindowWidth] = useState<number>(
         typeof window !== 'undefined' ? window.innerWidth : 0
     )
@@ -32,11 +32,12 @@ const Checkout: React.FC = () => {
           )
         : 0
     const Image = windowWidth <= 768 ? Mobile : Logo
+           
     return (
         <BaseLayout offInput>
-            {LoadingCheckout ? (
+            {LoadingCheckout || loading ? (
                 <Loading />
-            ) : (
+              ) : (
                 <>
                     {CheckoutQuery?.data &&
                     Object.keys(CheckoutQuery.data).length > 0 ? (

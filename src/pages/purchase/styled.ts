@@ -12,6 +12,10 @@ export const Container = styled.div`
     align-items: center;
     text-align: center;
 
+    > p {
+        color: ${(props) => props.theme.colors.secundary};
+    }
+
     img {
         width: 294px;
         height: 307px;

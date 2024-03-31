@@ -12,10 +12,10 @@ import { Button } from '..'
 
 const CardMobile: React.FC<CardCheckoutProps> = ({ data, price }) => {
     const router = useRouter()
-    const { Edit, DeleteMutation, DeleteAllItemsMutation } = useCheckoutData()
+    const { EditMutation, DeleteMutation, DeleteAllItemsMutation } = useCheckoutData()
 
     const handleEdit = (key: string, decrement: boolean) => {
-        Edit.mutate({ id: key, decrement })
+        EditMutation.mutate({ id: key, decrement })
     }
 
     const handleDelete = (key: string) => {

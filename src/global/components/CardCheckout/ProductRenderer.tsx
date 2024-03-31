@@ -8,7 +8,7 @@ import useCheckoutData from '@/global/hooks/useCheckoutData'
 import { CardCheckoutProps } from './types'
 
 const ProductRenderer: React.FC<CardCheckoutProps> = ({ data }) => {
-    const { Edit, DeleteMutation } = useCheckoutData()
+    const { EditMutation, DeleteMutation } = useCheckoutData()
     return (
         <>
             {data &&
@@ -64,7 +64,7 @@ const ProductRenderer: React.FC<CardCheckoutProps> = ({ data }) => {
                                     <S.BoxInput>
                                         <Smaller
                                             action={() =>
-                                                Edit.mutate({
+                                                EditMutation.mutate({
                                                     id: key,
                                                     decrement: true,
                                                 })
@@ -77,7 +77,7 @@ const ProductRenderer: React.FC<CardCheckoutProps> = ({ data }) => {
                                         />
                                         <More
                                             action={() =>
-                                                Edit.mutate({
+                                                EditMutation.mutate({
                                                     id: key,
                                                     decrement: false,
                                                 })

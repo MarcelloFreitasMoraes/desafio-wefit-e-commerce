@@ -6,6 +6,8 @@ export const Box = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
+    z-index: 9999;
 `
 
 export const Spinner = styled.span`

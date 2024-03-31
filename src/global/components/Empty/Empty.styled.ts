@@ -11,19 +11,27 @@ export const Container = styled.div`
     flex-direction: column;
     align-items: center;
     text-align: center;
+    
+    p {
+       color: ${(props) => props.theme.colors.secundary};
+    }
 `
 export const ImageBox = styled.div`
     position: relative;
     width: 60%;
     height: 70%;
-
+  
     img {
         width: 447px;
         height: 265px;
 
         @media screen and (max-width: 768px) {
-            width: 100%;
-            height: auto;
+            width: 100% !important;
+            height: auto !important;
         }
+    }
+
+    @media screen and (max-width: 768px) {
+        height: 35%;
     }
 `
