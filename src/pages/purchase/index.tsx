@@ -5,11 +5,13 @@ import TypographicComponent from '@/global/components/Typographic/Typographic'
 import { useRouter } from 'next/router'
 import Logo from '../../../public/complet.png'
 import { BaseLayout, Button } from '@/global/components'
+import useCheckoutData from '@/global/hooks/useCheckoutData'
 
 const Purchase: React.FC = () => {
     const router = useRouter()
+    const { CheckoutQuery } = useCheckoutData()
     return (
-        <BaseLayout offInput>
+        <BaseLayout offInput checkoutQuery={CheckoutQuery}>
             <S.Container>
                 <TypographicComponent
                     large

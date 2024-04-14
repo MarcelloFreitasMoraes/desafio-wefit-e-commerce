@@ -2,25 +2,20 @@ import React, { useState } from 'react'
 import { Container, Header, InputField } from '..'
 import * as S from './BaseLayout.styled'
 import { BaseLayoutProps } from './types'
-import useCheckoutData from '@/global/hooks/useCheckoutData'
 import useProductsData from '@/global/hooks/useProductsData'
 import { useRouter } from 'next/router'
-import TypographicComponent from '../Typographic/Typographic'
 
-const BaseLayout: React.FC<BaseLayoutProps> = ({ children, offInput }) => {
-    const { CheckoutQuery } = useCheckoutData()
+const BaseLayout: React.FC<BaseLayoutProps> = ({ children, offInput, checkoutQuery }) => {   
     const { ListProductsQuery } = useProductsData()
     const router = useRouter()
     const [value, setValue] = useState<string>('')
     const [data, setData] = useState<any>(
         ListProductsQuery?.data && Object.entries(ListProductsQuery.data)
     )
-    const [errorMessage, setErrorMessage] = useState<string>('')
-
     let itemCount = 0
 
-    if (CheckoutQuery.data && Object.keys(CheckoutQuery.data).length > 0) {
-        itemCount = CheckoutQuery.data && Object.keys(CheckoutQuery.data).length
+    if (checkoutQuery?.data && Object.keys(checkoutQuery?.data).length > 0) {
+        itemCount = checkoutQuery?.data && Object.keys(checkoutQuery?.data).length
     }
 
     const removeAccents = (str: string) => {
@@ -29,13 +24,7 @@ const BaseLayout: React.FC<BaseLayoutProps> = ({ children, offInput }) => {
 
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const inputValue = event.target.value
-        setValue(inputValue)
-
-        if (inputValue.trim() === '') {
-            setErrorMessage('Digite o nome do filme')
-        } else {
-            setErrorMessage('')
-        }
+        setValue(inputValue)       
 
         const filteredData =
             ListProductsQuery?.data &&
@@ -50,10 +39,9 @@ const BaseLayout: React.FC<BaseLayoutProps> = ({ children, offInput }) => {
 
     const handleSearch = () => {
         if (value.trim() !== '') {
-            router.push(`/search?id=${data[0]?.[0]}`)
-            setErrorMessage('')
+            router.push(`/search?id=${data[0]?.[0]}`)          
         } else {
-            setErrorMessage('Digite o nome do filme')
+            router.push(`/search`)          
         }
     }
 
@@ -62,17 +50,12 @@ const BaseLayout: React.FC<BaseLayoutProps> = ({ children, offInput }) => {
             <Header amount={itemCount || 0} />
             <S.ContainerInput>
                 {!offInput && (
-                    <>
                         <InputField
                             onSearch={handleSearch}
                             onChange={handleInputChange}
                             value={value}
                             data={data}
-                        />
-                        {errorMessage && (
-                            <TypographicComponent small title={errorMessage} />
-                        )}
-                    </>
+                        />                    
                 )}
             </S.ContainerInput>
             <S.ContainerChildren>{children}</S.ContainerChildren>

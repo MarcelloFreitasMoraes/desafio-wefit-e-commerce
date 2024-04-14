@@ -1,4 +1,3 @@
-import AlertProvider from '@/global/Provider/Alert/Alert'
 import '@/styles/globals.css'
 import theme from '@/styles/theme/theme'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
@@ -18,12 +17,10 @@ export default function App({ Component, pageProps }: AppProps) {
             })
     )
     return (
-        <AlertProvider>
             <ThemeProvider theme={theme}>
                 <QueryClientProvider client={queryClient}>
                     <Component {...pageProps} />
                 </QueryClientProvider>
             </ThemeProvider>
-        </AlertProvider>
     )
 }

@@ -12,7 +12,7 @@ export default function Home() {
     const amounts = CheckoutQuery?.data ? Object.values(CheckoutQuery.data) : []
 
     return (
-        <BaseLayout>
+        <BaseLayout checkoutQuery={CheckoutQuery}>
             <Head>
                 <title>Desafio WeFit</title>
                 <link rel="icon" href="/favicon.ico" />

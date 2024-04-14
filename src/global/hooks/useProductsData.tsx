@@ -2,12 +2,10 @@ import stale from '@/global/utils/stale'
 import { http } from '@/pages/api/api'
 import { useQuery } from '@tanstack/react-query'
 import { ProductList } from '../types/types'
-import { useAlert } from '../Provider/Alert/Alert'
 
 export const ProductsKey = 'ProductsData'
 
 export default function useProductsData(id?: string | string[] | undefined) {
-    const { showAlert } = useAlert()
     const query = useQuery<ProductList>(
         [ProductsKey, id],
         () =>
@@ -16,12 +14,7 @@ export default function useProductsData(id?: string | string[] | undefined) {
                 .then((res) => {
                     return res?.data || {}
                 })
-                .catch(() =>
-                    showAlert(
-                        'error',
-                        'Ops, ocorreu um erro desconhecido. Contate um administrador.'
-                    )
-                ),
+                .catch((error) => console.log(error)),
         {
             staleTime: stale.never,
             cacheTime: 0,

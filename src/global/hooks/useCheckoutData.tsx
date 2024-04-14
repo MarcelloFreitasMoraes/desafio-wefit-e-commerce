@@ -3,52 +3,39 @@ import stale from '@/global/utils/stale'
 import { http } from '@/pages/api/api'
 import { useMutation, useQuery } from '@tanstack/react-query'
 import { ProductList } from '../types/types'
-import { useEffect, useState } from 'react'
-import { useAlert } from '../Provider/Alert/Alert'
+import { useEffect} from 'react'
 
 export const CheckoutKey = 'CheckoutData'
 
 export default function useCheckoutData(id?: string | string[] | undefined) {
-    const { showAlert } = useAlert()
-    const [loading, setLoading] = useState<boolean>(false)
-
     const query = useQuery<ProductList>(
         [CheckoutKey, id],
-        () => {
-            return http
-                .get(`checkout.json`)
-                .then((res) => {
-                    return res.data || {}
-                })
-                .catch((err) => err)
+        async () => {
+            try {
+                const res = await http
+                    .get(`checkout.json`)
+                return res.data || {}
+            } catch (err) {
+                return err
+            }
         },
         {
             staleTime: stale.never,
             cacheTime: 0,
-            enabled: false,
+            enabled: Boolean(id),
         }
     )
 
     const mutation = useMutation(
         (values: ProductList) => {
             const method = 'post'
-            const body: any = { ...values, amount: values.amount + 1 }
+            const body = { ...values, amount: values.amount + 1 }
             return http[method](`checkout.json/`, body)
         },
         {
             onSuccess: () => {
-                query.refetch()
-                showAlert(
-                    'success',
-                    'Sucesso! Seu produto foi adicionado ao carrinho.'
-                )
-            },
-            onError: () => {
-                showAlert(
-                    'error',
-                    'Ops! Parece que houve um problema ao adicionar o item ao seu carrinho. Por favor, verifique sua conexão com a internet e tente novamente.'
-                )
-            },
+                query.refetch()               
+            },       
         }
     )
 
@@ -74,15 +61,7 @@ export default function useCheckoutData(id?: string | string[] | undefined) {
         {
             onSuccess: () => {
                 query.refetch()
-                setLoading(true)
-            },
-            onError: () => {
-                showAlert(
-                    'error',
-                    'Ops! Parece que houve um problema ao adicionar o item ao seu carrinho. Por favor, verifique sua conexão com a internet e tente novamente.'
-                )
-                setLoading(false)
-            },
+            },         
         }
     )
 
@@ -94,11 +73,7 @@ export default function useCheckoutData(id?: string | string[] | undefined) {
         },
         {
             onSuccess: () => {
-                query.refetch()
-                showAlert(
-                    'success',
-                    'Sucesso! Seu produto foi removido do carrinho.'
-                )
+                query.refetch()               
             },         
         }
     )
@@ -132,14 +107,10 @@ export default function useCheckoutData(id?: string | string[] | undefined) {
         EditMutation,
         DeleteMutation,
         DeleteAllItemsMutation,
-        loading,
         LoadingCheckout:
-            query.isLoading ||
             mutation.isLoading ||
             EditMutation.isLoading ||
             DeleteMutation.isLoading ||
-            loading ||
             DeleteAllItemsMutation.isLoading,
-        CheckoutRefetch: query.refetch(),
     }
 }

@@ -40,7 +40,7 @@ const Search: React.FC = () => {
         )?.amount || 0
 
     return (
-        <BaseLayout offInput={noInput}>
+        <BaseLayout offInput={noInput} checkoutQuery={CheckoutQuery}>
             {LoadingListProducts ? (
                 <Loading />
             ) : (
@@ -48,10 +48,10 @@ const Search: React.FC = () => {
                     {id !== 'undefined' ? (
                         <S.ContainerCards>
                             <Cards
-                                data={ListProductsQuery.data}
+                                data={ListProductsQuery?.data}
                                 action={() =>
                                     CheckoutMutation.mutate({
-                                        ...ListProductsQuery.data,
+                                        ...ListProductsQuery?.data,
                                     })
                                 }
                                 amount={amount}
